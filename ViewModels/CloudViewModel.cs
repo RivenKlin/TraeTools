@@ -27,7 +27,7 @@ public partial class CloudViewModel : ViewModelBase
     private string _forkRepo = "TraeTools";
 
     [ObservableProperty]
-    private string _cronExpression = "20 23 * * *";
+    private string _cronExpression = "33 23 * * *";
 
     [ObservableProperty]
     private string _lastRun = "—";
@@ -69,7 +69,7 @@ public partial class CloudViewModel : ViewModelBase
     {
         Steps.Add(new CloudStep { Index = 1, Title = "GitHub 授权", Description = "自动打开授权页面完成登录", Status = "pending" });
         Steps.Add(new CloudStep { Index = 2, Title = "写入 Secret", Description = "写入账号会话与设备号凭证", Status = "pending" });
-        Steps.Add(new CloudStep { Index = 3, Title = "启用定时任务", Description = "一键部署时自动启用 · 每日北京时间 07:20", Status = "pending" });
+        Steps.Add(new CloudStep { Index = 3, Title = "启用定时任务", Description = "一键部署时自动启用 · 每日北京时间 07:33", Status = "pending" });
 
         RefreshCloudState(isDeployFlow: false);
         _ = RefreshDeploymentStateAsync();
@@ -125,8 +125,8 @@ public partial class CloudViewModel : ViewModelBase
             if (status.IsDeployed)
             {
                 StateText = status.DeployedAccountCount >= 2
-                    ? $"已部署完成（{status.DeployedAccountCount} 个账号），云端每天北京时间 7:20 自动签到"
-                    : "已部署完成（1 个账号），云端每天北京时间 7:20 自动签到";
+                    ? $"已部署完成（{status.DeployedAccountCount} 个账号），云端每天北京时间 7:33 自动签到"
+                    : "已部署完成（1 个账号），云端每天北京时间 7:33 自动签到";
                 ActionButtonText = "重新部署";
                 LastRun = await TryGetLastRunAsync(token, login);
             }
@@ -484,7 +484,7 @@ public partial class CloudViewModel : ViewModelBase
 
             if (conclusion == "success")
             {
-                AppendLog($"部署成功！{enabled.Count} 个账号已就绪，GitHub 将每天北京时间 7:20 自动签到。");
+                AppendLog($"部署成功！{enabled.Count} 个账号已就绪，GitHub 将每天北京时间 7:33 自动签到。");
                 StateText = "已部署完成（" + enabled.Count + " 个账号），云端每天自动签到";
                 ActionButtonText = "重新部署";
             }
